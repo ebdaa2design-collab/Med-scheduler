@@ -1,0 +1,211 @@
+/* ==========================================
+   Animations
+========================================== */
+
+/* Fade In */
+@keyframes fadeIn{
+
+from{
+opacity:0;
+transform:translateY(20px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+.fadeIn{
+animation:fadeIn .6s ease forwards;
+}
+
+
+
+
+
+/* Slide In Right */
+@keyframes slideInRight{
+
+from{
+opacity:0;
+transform:translateX(40px);
+}
+
+to{
+opacity:1;
+transform:translateX(0);
+}
+
+}
+
+.slideInRight{
+animation:slideInRight .6s ease forwards;
+}
+
+
+
+
+
+/* Slide In Left */
+@keyframes slideInLeft{
+
+from{
+opacity:0;
+transform:translateX(-40px);
+}
+
+to{
+opacity:1;
+transform:translateX(0);
+}
+
+}
+
+.slideInLeft{
+animation:slideInLeft .6s ease forwards;
+}
+
+
+
+
+
+/* Pulse */
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.05);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+.pulse{
+animation:pulse 1.5s infinite;
+}
+
+
+
+
+
+/* Bounce */
+@keyframes bounce{
+
+0%,100%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-10px);
+}
+
+}
+
+.bounce{
+animation:bounce 1s infinite;
+}
+
+
+
+
+
+/* Glow effect */
+.glow{
+
+box-shadow:0 0 15px rgba(33,150,243,.4);
+transition:.3s;
+
+}
+
+.glow:hover{
+
+box-shadow:0 0 25px rgba(33,150,243,.6);
+
+}
+
+
+
+
+
+/* Button click effect */
+button:active{
+
+transform:scale(.96);
+
+}
+
+
+
+
+
+/* Smooth appearance for cards */
+.patientCard,
+.medicineCard,
+.nextDoseCard,
+.progressCard,
+.scheduleCard,
+.calendarCard,
+.settingsCard,
+.backupCard,
+.medicineInfo,
+.statBox{
+
+animation:fadeIn .6s ease both;
+
+}
+
+
+
+
+
+/* Loading spinner (future use) */
+@keyframes spin{
+
+from{
+transform:rotate(0deg);
+}
+
+to{
+transform:rotate(360deg);
+}
+
+}
+
+.spinner{
+
+width:40px;
+
+height:40px;
+
+border:4px solid #ddd;
+
+border-top:4px solid #2196f3;
+
+border-radius:50%;
+
+animation:spin 1s linear infinite;
+
+}
+
+
+
+
+
+/* Highlight effect */
+.highlight{
+
+animation:pulse 1s ease;
+
+background:rgba(33,150,243,.1);
+
+border-radius:10px;
+
+}

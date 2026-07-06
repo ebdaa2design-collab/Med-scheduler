@@ -1,0 +1,23 @@
+{
+  "name": "منظم مواعيد الأدوية",
+  "short_name": "الدواء",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1976d2",
+  "description": "تطبيق لتنظيم ومتابعة مواعيد تناول الأدوية بشكل ذكي",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "assets/icons/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

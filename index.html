@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>منظم مواعيد الأدوية</title>
+
+    <meta name="theme-color" content="#1E88E5">
+    <meta name="description" content="تطبيق لتنظيم مواعيد تناول الأدوية">
+
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<header class="topBar">
+
+<div class="logo">
+
+<i class="fa-solid fa-capsules"></i>
+
+<h1>منظم العلاج</h1>
+
+</div>
+
+<div class="clockBox">
+
+<div id="todayDate"></div>
+
+<div id="liveClock"></div>
+
+</div>
+
+</header>
+
+<main>
+
+<section class="hero">
+
+<h2>
+
+مرحباً بك 👋
+
+</h2>
+
+<p>
+
+قم بإدخال بيانات المريض ومواعيد أول جرعة،
+
+وسيتم إنشاء جدول العلاج بالكامل تلقائياً.
+
+</p>
+
+</section>
+
+<section class="patientCard">
+
+<h3>
+
+بيانات المريض
+
+</h3>
+
+<div class="inputGrid">
+
+<div class="inputBox">
+
+<label>
+
+اسم المريض
+
+</label>
+
+<input
+type="text"
+id="patientName"
+placeholder="اكتب اسم المريض">
+
+</div>
+
+<div class="inputBox">
+
+<label>
+
+العمر
+
+</label>
+
+<input
+type="number"
+id="patientAge"
+placeholder="العمر">
+
+</div>
+
+<div class="inputBox full">
+
+<label>
+
+ملاحظات
+
+</label>
+
+<textarea
+id="patientNotes"
+placeholder="أي ملاحظات إضافية"></textarea>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="medicineCard">
+
+<h3>
+
+موعد أول جرعة
+
+</h3>
+
+<div class="medicine">
+
+<h4>
+
+💊 Tavanic 500 mg
+
+</h4>
+
+<label>
+
+وقت أول جرعة
+
+</label>
+
+<input
+type="datetime-local"
+id="tavanicStart">
+
+</div>
+
+<div class="medicine">
+
+<h4>
+
+💊 Flomax 0.4 mg
+
+</h4>
+
+<label>
+
+وقت أول جرعة
+
+</label>
+
+<input
+type="datetime-local"
+id="flomaxStart">
+
+</div>
+
+<div class="medicine">
+
+<h4>
+
+💊 Divido 75 mg
+
+</h4>
+
+<label>
+
+وقت أول جرعة
+
+</label>
+
+<input
+type="datetime-local"
+id="dividoStart">
+
+</div>
+
+<div class="buttons">
+
+<button id="startTreatment">
+
+ابدأ العلاج
+
+</button>
+
+<button id="resetData">
+
+إعادة ضبط
+
+</button>
+
+</div>
+
+</section>
+<!-- بطاقة الجرعة القادمة -->
+
+<section class="nextDoseCard">
+
+<div class="cardHeader">
+
+<h3>
+
+الجرعة القادمة
+
+</h3>
+
+<span id="nextDoseStatus">
+
+بانتظار بدء العلاج
+
+</span>
+
+</div>
+
+<div class="nextDoseBody">
+
+<div class="doseIcon">
+
+<i class="fa-solid fa-pills"></i>
+
+</div>
+
+<div class="doseInfo">
+
+<h2 id="nextMedicine">
+
+لا توجد جرعة
+
+</h2>
+
+<p id="nextInstruction">
+
+سيتم عرض الجرعة القادمة هنا
+
+</p>
+
+</div>
+
+</div>
+
+<div class="countdownBox">
+
+<div id="countdown">
+
+00:00:00
+
+</div>
+
+<p>
+
+الوقت المتبقي للجرعة القادمة
+
+</p>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- شريط التقدم -->
+
+<section class="progressCard">
+
+<div class="progressTop">
+
+<h3>
+
+نسبة إكمال العلاج
+
+</h3>
+
+<span id="progressPercent">
+
+0%
+
+</span>
+
+</div>
+
+<div class="progressBar">
+
+<div
+class="progressFill"
+id="progressFill">
+
+</div>
+
+</div>
+
+<div class="progressNumbers">
+
+<span id="completedDoses">
+
+0 جرعة
+
+</span>
+
+<span id="remainingDoses">
+
+0 متبقية
+
+</span>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- الإحصائيات -->
+
+<section class="statsGrid">
+
+<div class="statBox">
+
+<i class="fa-solid fa-check-circle"></i>
+
+<h2 id="doneCounter">
+
+0
+
+</h2>
+
+<p>
+
+تم تناولها
+
+</p>
+
+</div>
+
+<div class="statBox">
+
+<i class="fa-solid fa-clock"></i>
+
+<h2 id="waitingCounter">
+
+0
+
+</h2>
+
+<p>
+
+قيد الانتظار
+
+</p>
+
+</div>
+
+<div class="statBox">
+
+<i class="fa-solid fa-calendar-days"></i>
+
+<h2 id="daysLeft">
+
+0
+
+</h2>
+
+<p>
+
+أيام متبقية
+
+</p>
+
+</div>
+
+<div class="statBox">
+
+<i class="fa-solid fa-capsules"></i>
+
+<h2 id="finishedMedicines">
+
+0
+
+</h2>
+
+<p>
+
+أدوية منتهية
+
+</p>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- جدول الجرعات -->
+
+<section class="scheduleCard">
+
+<div class="sectionHeader">
+
+<h3>
+
+جدول العلاج
+
+</h3>
+
+<div>
+
+<button id="printBtn">
+
+طباعة
+
+</button>
+
+<button id="pdfBtn">
+
+PDF
+
+</button>
+
+</div>
+
+</div>
+
+<div id="scheduleContainer">
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- التقويم -->
+
+<section class="calendarCard">
+
+<h3>
+
+تقويم العلاج
+
+</h3>
+
+<div id="calendarContainer">
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- صفحة معلومات الأدوية -->
+
+<section class="medicineInfo">
+
+<h3>
+
+معلومات الأدوية
+
+</h3>
+
+<div class="infoCards">
+
+<div class="infoCard">
+
+<h4>
+
+Tavanic 500mg
+
+</h4>
+
+<p>
+
+مرة واحدة يومياً لمدة عشرة أيام.
+
+</p>
+
+<p>
+
+بعد الأكل.
+
+</p>
+
+</div>
+
+<div class="infoCard">
+
+<h4>
+
+Flomax 0.4mg
+
+</h4>
+
+<p>
+
+مرة واحدة يومياً.
+
+</p>
+
+<p>
+
+قبل النوم.
+
+</p>
+
+</div>
+
+<div class="infoCard">
+
+<h4>
+
+Divido 75mg
+
+</h4>
+
+<p>
+
+ثلاث مرات يومياً.
+
+</p>
+
+<p>
+
+بعد الوجبات الرئيسية.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+<!-- نافذة الإعدادات -->
+
+<section class="settingsCard">
+
+    <div class="sectionHeader">
+
+        <h3>
+            الإعدادات
+        </h3>
+
+    </div>
+
+    <div class="settingsGrid">
+
+        <div class="settingItem">
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="darkMode">
+
+                <span class="slider"></span>
+
+            </label>
+
+            <span>
+
+                الوضع الليلي
+
+            </span>
+
+        </div>
+
+        <div class="settingItem">
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="soundNotification"
+                    checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+            <span>
+
+                تشغيل صوت التنبيه
+
+            </span>
+
+        </div>
+
+        <div class="settingItem">
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="browserNotification"
+                    checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+            <span>
+
+                إشعارات المتصفح
+
+            </span>
+
+        </div>
+
+        <div class="settingItem">
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="vibrationNotification"
+                    checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+            <span>
+
+                اهتزاز الهاتف
+
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+<!-- النسخ الاحتياطي -->
+
+<section class="backupCard">
+
+    <h3>
+
+        النسخ الاحتياطي
+
+    </h3>
+
+    <div class="backupButtons">
+
+        <button id="exportBackup">
+
+            تصدير نسخة
+
+        </button>
+
+        <button id="importBackup">
+
+            استيراد نسخة
+
+        </button>
+
+        <input
+            type="file"
+            id="backupFile"
+            hidden>
+
+    </div>
+
+</section>
+
+
+
+
+
+<!-- رسالة انتهاء العلاج -->
+
+<div
+    class="finishPopup"
+    id="finishPopup">
+
+    <div class="popupContent">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        <h2>
+
+            🎉 مبروك
+
+        </h2>
+
+        <p>
+
+            تم الانتهاء من جميع جرعات العلاج بنجاح.
+
+        </p>
+
+        <button id="closePopup">
+
+            إغلاق
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+
+
+<footer>
+
+    <p>
+
+        © جميع الحقوق محفوظة
+
+    </p>
+
+    <p>
+
+        Medication Schedule System
+
+    </p>
+
+</footer>
+
+</main>
+
+<script src="js/storage.js"></script>
+<script src="js/scheduler.js"></script>
+<script src="js/timer.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/pdf.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
