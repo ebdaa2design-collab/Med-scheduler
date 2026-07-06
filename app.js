@@ -291,18 +291,21 @@ function updateProgress() {
 
 function loadSavedData() {
 
-    const savedSchedule = Storage.getSchedule();
+const savedSchedule = Storage.getSchedule();
 
-    if (savedSchedule && savedSchedule.length > 0) {
+if (savedSchedule && savedSchedule.length > 0) {
 
-        scheduleData = savedSchedule;
+scheduleData = savedSchedule;
 
-        renderSchedule();
+renderSchedule();
 
-        startSystem();
+startSystem();
 
-    }
+} else {
 
+showEmptyState();
+
+}
 
 
     const patient = Storage.getPatient();
